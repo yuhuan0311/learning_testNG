@@ -1,0 +1,26 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="All Test Suite">
+<test name="简单测试" preserve-order="true">
+<!--    <groups>-->
+<!--        <run>-->
+<!--            <include name="高"/>-->
+
+<!--            <exclude name = "低"/>-->
+<!--        </run>-->
+<!--    </groups>-->
+    <parameter name="add1" value="3"/>
+    <parameter name="add2" value="2"/>
+    <parameter name="result" value="5"/>
+
+    <classes>
+<!--        <class name="TestHelloWorld"/>-->
+        <class name="TestNG_Demo1">
+<!--            <methods>-->
+<!--                <include name="testCase2"/>-->
+<!--                <include name="testCase1"/>-->
+<!--            </methods>-->
+        </class>
+    </classes>
+
+</test>
+</suite>

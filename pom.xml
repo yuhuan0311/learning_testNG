@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>testNg</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <dependencies>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.11</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jmockit</groupId>
+            <artifactId>jmockit</artifactId>
+            <version>1.9</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+<!--                这个插件，是在单元测试中，一旦遇到错误就立刻停止的插件，会把错误信息收集到target/surefire-reports下面-->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
+                <configuration>
+                    <!--<argLine>${surefire.jacoco.args}</argLine>-->
+                    <testFailureIgnore>true</testFailureIgnore>
+                </configuration>
+            </plugin>
+
+
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.4</version>
+                <executions>
+                    <execution>
+                        <id>before-unit-test-execution</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                        <configuration>
+                            <excludes>
+                                <exclude>**/*Config*</exclude>
+                                <exclude>**/co/megatronix/kirin/api/aspect/**</exclude>
+                                <exclude>**/co/megaestronix/kirin/api/request/**</exclude>
+                                <exclude>**/co/megatronix/kirin/api/constant/**</exclude>
+                            </excludes>
+                            <destFile>${project.build.directory}/coverage-reports/jacoco-unit.exec</destFile>
+                            <!--<propertyName>surefire.jacoco.args</propertyName>-->
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>after-unit-test-execution</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <excludes>
+                                <exclude>**/*Config*</exclude>
+                                <exclude>**/co/megatronix/kirin/api/aspect/**</exclude>
+                                <exclude>**/co/megatronix/kirin/api/request/**</exclude>
+                                <exclude>**/co/megatronix/kirin/api/constant/**</exclude>
+                            </excludes>
+                            <dataFile>${project.build.directory}/coverage-reports/jacoco-unit.exec</dataFile>
+                            <outputDirectory>${project.reporting.outputDirectory}/coverage-reports</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>
